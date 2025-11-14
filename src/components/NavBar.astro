@@ -44,13 +44,18 @@ const menuItems = [
 				))
 			}
 			<!-- 背景颜色切换按钮 -->
-			<button 
+			<button
 				id="bg-toggle"
 				class="ml-1 p-2 rounded-full hover:bg-gray-200 transition-colors duration-300"
 				title="切换背景颜色"
 			>
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+					></path>
 				</svg>
 			</button>
 		</div>
@@ -58,16 +63,21 @@ const menuItems = [
 		<!-- Mobile Right Side -->
 		<div class="flex items-center gap-2 md:hidden">
 			<!-- 背景颜色切换按钮 (移动端) -->
-			<button 
+			<button
 				id="bg-toggle-mobile"
 				class="p-2 rounded-full hover:bg-gray-200 transition-colors duration-300"
 				title="切换背景颜色"
 			>
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+					></path>
 				</svg>
 			</button>
-			
+
 			<!-- Mobile Menu Button -->
 			<button @click="isOpen = !isOpen" class="text-gray-800 focus:outline-none">
 				<svg x-show="!isOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -108,16 +118,16 @@ const menuItems = [
 		const bgToggle = document.getElementById('bg-toggle');
 		const bgToggleMobile = document.getElementById('bg-toggle-mobile');
 		const body = document.body;
-		
+
 		// 设置过渡效果
 		body.style.transition = 'background-color 0.8s ease';
-		
+
 		// 从 localStorage 读取保存的背景颜色偏好
 		const savedBgColor = localStorage.getItem('bgColor');
 		if (savedBgColor === 'pink') {
 			body.style.backgroundColor = '#fff0f5'; // 浅粉色
 		}
-		
+
 		// 切换背景颜色的函数
 		function toggleBackground() {
 			const currentBg = body.style.backgroundColor;
@@ -131,18 +141,18 @@ const menuItems = [
 				localStorage.setItem('bgColor', 'pink');
 			}
 		}
-		
+
 		// 为桌面端按钮添加事件监听
 		if (bgToggle) {
 			bgToggle.addEventListener('click', toggleBackground);
 		}
-		
+
 		// 为移动端按钮添加事件监听
 		if (bgToggleMobile) {
 			bgToggleMobile.addEventListener('click', toggleBackground);
 		}
 	}
-	
+
 	// 页面加载完成后初始化
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', initBackgroundToggle);

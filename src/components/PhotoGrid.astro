@@ -21,26 +21,24 @@ const { images } = Astro.props;
 				data-type="image"
 				data-glightbox={image.description ? `title: ${image.description}` : undefined}
 			>
-				{
-					image.remoteSrc ? (
-						<img
-							src={image.remoteSrc}
-							class="w-full h-full object-cover rounded-sm shadow-sm hover:shadow-lg transition-shadow"
-							alt={image.title}
-							loading="lazy"
-						/>
-					) : (
-						<Image
-							src={image.src}
-							quality={90}
-							format="webp"
-							width={image.src.width}
-							height={image.src.height}
-							class="w-full h-full object-cover rounded-sm shadow-sm hover:shadow-lg transition-shadow"
-							alt={image.title}
-						/>
-					)
-				}
+				{image.remoteSrc ? (
+					<img
+						src={image.remoteSrc}
+						class="w-full h-full object-cover rounded-sm shadow-sm hover:shadow-lg transition-shadow"
+						alt={image.title}
+						loading="lazy"
+					/>
+				) : (
+					<Image
+						src={image.src}
+						quality={90}
+						format="webp"
+						width={image.src.width}
+						height={image.src.height}
+						class="w-full h-full object-cover rounded-sm shadow-sm hover:shadow-lg transition-shadow"
+						alt={image.title}
+					/>
+				)}
 			</a>
 		))
 	}
