@@ -46,6 +46,8 @@ interface LayoutBox {
 	forcedAspectRatio?: boolean;
 }
 
+let glightboxInstance: any | null = null;
+
 export async function setupGallery() {
 	if (typeof document === 'undefined') return;
 
@@ -67,19 +69,20 @@ export async function setupGallery() {
 
 	// Get actual image dimensions after loading
 	const layout = createLayoutFor(imageElements, container);
-	console.log('Generated layout:', layout);
 
 	applyImagesStyleBasedOnLayout(imageLinks, layout);
 	applyContainerStyleBasedOnLayout(container, layout);
 
-	// Initialize GLightbox
-	GLightbox({
-		selector: '.glightbox',
-		openEffect: 'zoom',
-		closeEffect: 'fade',
-		width: 'auto',
-		height: 'auto',
-	});
+	// Initialize GLightbox (only once)
+	if (!glightboxInstance) {
+		glightboxInstance = GLightbox({
+			selector: '.glightbox',
+			openEffect: 'zoom',
+			closeEffect: 'fade',
+			width: 'auto',
+			height: 'auto',
+		});
+	}
 }
 
 function createLayoutFor(
@@ -143,8 +146,17 @@ function applyContainerStyleBasedOnLayout(container: HTMLElement, layout: Justif
 if (typeof window !== 'undefined') {
 	const debouncedSetup = debounce(setupGallery, 250);
 
-	document.addEventListener('DOMContentLoaded', setupGallery);
-	window.addEventListener('resize', debouncedSetup);
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', () => {
+			void setupGallery();
+		});
+	} else {
+		void setupGallery();
+	}
+
+	window.addEventListener('resize', () => {
+		void debouncedSetup();
+	});
 }
 
 // Debounce helper
